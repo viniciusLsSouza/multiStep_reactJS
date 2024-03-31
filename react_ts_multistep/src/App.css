@@ -78,3 +78,17 @@ textarea {
 .actions button:hover {
   background-color: #cfcfcf;
 }
+
+.custom-button {
+  background-color: #638cd8; /* Cor de fundo */
+  border: none; /* Remove a borda */
+  color: white; /* Cor do texto */
+  padding: 15px 25px; /* Espaçamento interno */
+  text-align: center; /* Alinhamento do texto */
+  text-decoration: none; /* Remove sublinhado */
+  display: inline-block; /* Exibe como bloco */
+  font-size: 16px; /* Tamanho da fonte */
+  margin: 4px 2px; /* Margem externa */
+  cursor: pointer; /* Ícone de cursor ao passar por cima */
+  border-radius: 10px; /* Borda arredondada */
+}

@@ -7,18 +7,54 @@ import Thanks from "./components/Thanks";
 import { useForm } from "./hooks/useForm";
 import Steps from "./components/Steps";
 import './App.css'
+import { useState } from "react";
+import {FiSend} from "react-icons/fi"
+
+
+type FormFields = {
+  name: string;
+  email: string;
+  review: string;
+  comment: string;
+};
+
+
+const formtemplate:FormFields = {
+  name: "",
+  email: "",
+  review: "",
+  comment: "",
+
+}
+
 
 function App() {
 
+  const [data,setData] = useState(formtemplate);
+
+
+  const updateFieldHandler = (key:string,value:string) => {
+  
+    setData((prev) => {
+      return {...prev, [key]: value }
+    })
+
+
+
+  }
+
+  
+
   const formComponents = [
-    <ReviewForm/>,
-    <UserForm/>,
-    <Thanks/>
+    <UserForm data={data} updateFieldHandler={updateFieldHandler}/>,
+    <ReviewForm data={data} updateFieldHandler={updateFieldHandler}/>,
+    
+    <Thanks data={data}/>
 
 
   ]
 
-  const {currentStep,currentComponent,changeStep} = useForm(formComponents);
+  const {currentStep,currentComponent,changeStep,isLastStep} = useForm(formComponents);
 
   return (
     <div className="app">
@@ -35,8 +71,8 @@ function App() {
             {currentComponent}
           </div>
           <div className="actions"></div>
-          <button type="button" onClick={() => changeStep(currentStep - 1)}><GrFormPrevious/><span>Voltar</span></button>
-          <button type="submit"><GrFormNext/><span>Avançar</span></button>
+          <button className="custom-button" type="button" onClick={() => changeStep(currentStep - 1)}><GrFormPrevious/>Voltar</button>
+          {!isLastStep ? (<button className="custom-button" type="submit"><GrFormNext/>Avançar</button>) : (<button className="custom-button" type="submit"><FiSend/>Enviar</button>)}
         </form>
       </div>
     </div>
